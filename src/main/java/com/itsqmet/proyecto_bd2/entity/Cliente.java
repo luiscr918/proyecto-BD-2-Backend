@@ -16,6 +16,7 @@ public class Cliente {
     //cedula
     @Column(unique = true)
     @Size(min = 10)
+    @NotBlank
     private String cedula;
     //nombre
     @NotBlank(message = "El nombre es obligatorio")
