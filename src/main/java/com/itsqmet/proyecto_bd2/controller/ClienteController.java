@@ -36,6 +36,7 @@ public class ClienteController {
         Optional<Cliente> clienteOptional = clienteService.buscarClienteId(id);
         if (clienteOptional.isPresent()) {
             Cliente clienteExiste = clienteOptional.get();
+            clienteExiste.setCedula(cliente.getCedula());
             clienteExiste.setNombre(cliente.getNombre());
             clienteExiste.setApellido(cliente.getApellido());
             clienteExiste.setCorreo(cliente.getCorreo());
