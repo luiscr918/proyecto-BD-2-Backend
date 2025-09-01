@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -17,13 +18,11 @@ public class Prestamo {
     private Long id;
     //fecha de prestamo
     @NotNull(message = "La fecha de préstamo es obligatoria")
-    @FutureOrPresent(message = "La fecha de préstamo no puede ser en el pasado")
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaPrestamo;
     //fecha devolucion
     @NotNull(message = "La fecha de devolución es obligatoria")
-    @FutureOrPresent(message = "La fecha de devolución debe ser igual o posterior a hoy")
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaDevolucion;
     //estado
     @NotBlank(message = "El estado es obligatorio")
