@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/videojuego")
-/*@CrossOrigin(origins = "http://localhost:4200")*/
+@CrossOrigin(origins = "http://localhost:5173")
 public class VideojuegoController {
     @Autowired
     private VideojuegoService videojuegoService;

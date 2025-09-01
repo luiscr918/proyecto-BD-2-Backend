@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/prestamo")
-/*@CrossOrigin(origins = "http://localhost:4200")*/
+@CrossOrigin(origins = "http://localhost:5173")
 public class PrestamoController {
     @Autowired
     private PrestamoService prestamoService;
