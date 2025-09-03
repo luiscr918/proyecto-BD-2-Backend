@@ -39,5 +39,7 @@ public class Cliente {
     //Cardinalidad
     @OneToMany(mappedBy = "cliente")
     private List<Prestamo> prestamos;
+    //campo prueva
+    private String prueba;
 }
 
