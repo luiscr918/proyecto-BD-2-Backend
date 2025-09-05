@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface UsuarioRepository extends MongoRepository<Usuario,String> {
-    List<Usuario> findByRolId(String correo);
+    List<Usuario> findByRolId(String rol_id);
 }

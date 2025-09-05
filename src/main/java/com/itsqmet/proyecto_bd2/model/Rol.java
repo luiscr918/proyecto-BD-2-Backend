@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "roles")
 public class Rol {
     @Id
-    private String id;
+    private Integer id;
 
     @NotNull(message = "El rol es obligatorio")
     private String nombre;

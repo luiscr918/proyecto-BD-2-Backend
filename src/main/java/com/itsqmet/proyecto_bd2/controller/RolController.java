@@ -22,7 +22,7 @@ public class RolController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Rol> obtenerPorId(@PathVariable String id) {
+    public Optional<Rol> obtenerPorId(@PathVariable Integer id) {
         return rolService.obtenerPorId(id);
     }
 
@@ -32,13 +32,13 @@ public class RolController {
     }
 
     @PutMapping("/{id}")
-    public Rol actualizar(@PathVariable String id, @RequestBody Rol rol) {
+    public Rol actualizar(@PathVariable Integer id, @RequestBody Rol rol) {
         rol.setId(id);
         return rolService.guardar(rol);
     }
 
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable String id) {
+    public void eliminar(@PathVariable Integer id) {
         rolService.eliminar(id);
     }
 }

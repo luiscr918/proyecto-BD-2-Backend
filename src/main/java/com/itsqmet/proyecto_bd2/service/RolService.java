@@ -17,7 +17,7 @@ public class RolService {
         return rolRepository.findAll();
     }
 
-    public Optional<Rol> obtenerPorId(String id) {
+    public Optional<Rol> obtenerPorId(Integer id) {
         return rolRepository.findById(id);
     }
 
@@ -25,7 +25,7 @@ public class RolService {
         return rolRepository.save(rol);
     }
 
-    public void eliminar(String id) {
+    public void eliminar(Integer id) {
         rolRepository.deleteById(id);
     }
 }
