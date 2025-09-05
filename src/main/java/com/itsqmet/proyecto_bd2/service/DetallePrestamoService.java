@@ -1,6 +1,6 @@
 package com.itsqmet.proyecto_bd2.service;
 
-import com.itsqmet.proyecto_bd2.entity.DetallePrestamo;
+import com.itsqmet.proyecto_bd2.model.DetallePrestamo;
 import com.itsqmet.proyecto_bd2.repository.DetallePrestamoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,21 +12,28 @@ import java.util.Optional;
 public class DetallePrestamoService {
     @Autowired
     private DetallePrestamoRepository detallePrestamoRepository;
-    //Lista de detalle prestamo
-    public List<DetallePrestamo> allDetallePrestamos(){
+
+    public List<DetallePrestamo> obtenerTodos() {
         return detallePrestamoRepository.findAll();
     }
 
-    //buscar por id(para actualizar y eliminar)
-    public Optional<DetallePrestamo> buscarDetallePrestamoId(Long id){
+    public Optional<DetallePrestamo> obtenerPorId(String id) {
         return detallePrestamoRepository.findById(id);
     }
-    //Guardar detalle prestamo
-    public DetallePrestamo guardarDetallePrestamo(DetallePrestamo detallePrestamo){
+
+    public DetallePrestamo guardar(DetallePrestamo detallePrestamo) {
         return detallePrestamoRepository.save(detallePrestamo);
     }
-    //Eliminar detalle prestamo
-    public void eliminarDetallePrestamo(Long id){
+
+    public void eliminar(String id) {
         detallePrestamoRepository.deleteById(id);
+    }
+
+    public List<DetallePrestamo> obtenerPorPrestamo(String prestamoId) {
+        return detallePrestamoRepository.findByPrestamoId(prestamoId);
+    }
+
+    public List<DetallePrestamo> obtenerPorVideojuego(String videojuegoId) {
+        return detallePrestamoRepository.findByVideojuegoId(videojuegoId);
     }
 }
