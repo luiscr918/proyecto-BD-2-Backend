@@ -3,6 +3,7 @@ package com.itsqmet.proyecto_bd2.controller;
 import com.itsqmet.proyecto_bd2.model.Usuario;
 import com.itsqmet.proyecto_bd2.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,7 +60,23 @@ public class UsuarioController {
 
     // Buscar usuarios por rol
     @GetMapping("/rol/{rolId}")
-    public List<Usuario> obtenerUsuariosPorRol(@PathVariable String rolId) {
+    public List<Usuario> obtenerUsuariosPorRol(@PathVariable Integer rolId) {
         return usuarioService.obtenerPorRol(rolId);
+    }
+
+    //login
+    @PostMapping("/login")
+    public Object login(@RequestBody Usuario loginRequest) {
+        Optional<Usuario> usuarioOpt = usuarioService.login(loginRequest.getCorreo(), loginRequest.getContrasenia());
+
+        if (usuarioOpt.isEmpty()) {
+            return ResponseEntity.status(401).body("Correo o contraseña incorrectos");
+        }
+
+        Usuario usuario = usuarioOpt.get();
+        usuario.setContrasenia(null); // no devolver contraseña
+        //explicación: no esta seteando en la bd solo en el objeto que llega para tener seguridad
+
+        return usuario; // aquí el front puede usar usuario.getRolId() para decidir vistas
     }
 }

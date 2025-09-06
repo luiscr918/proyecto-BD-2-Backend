@@ -34,5 +34,5 @@ public class Usuario {
     private String contrasenia;
 
     @NotBlank(message = "El rol es obligatorio")
-    private String rolId; // FK a Rol
+    private Integer rolId; // FK a Rol
 }

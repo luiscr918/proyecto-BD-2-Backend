@@ -45,6 +45,7 @@ public class VideojuegoController {
             existente.setStock(videojuego.getStock());
             existente.setPlataforma(videojuego.getPlataforma());
             existente.setPrecio(videojuego.getPrecio());
+            existente.setUrlImagen(videojuego.getUrlImagen());
             return videojuegoService.guardar(existente);
         }
         return null;

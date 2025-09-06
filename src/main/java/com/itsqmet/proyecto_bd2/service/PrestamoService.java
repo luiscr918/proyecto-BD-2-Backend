@@ -32,6 +32,9 @@ public class PrestamoService {
     public List<Prestamo> obtenerPorUsuario(String usuarioId) {
         return prestamoRepository.findByUsuarioId(usuarioId);
     }
+    public List<Prestamo> obtenerPorVideojuego(String videojuegoId) {
+        return prestamoRepository.findByVideojuegoId(videojuegoId);
+    }
 
     public List<Prestamo> obtenerPorEstado(String estado) {
         return prestamoRepository.findByEstado(estado);

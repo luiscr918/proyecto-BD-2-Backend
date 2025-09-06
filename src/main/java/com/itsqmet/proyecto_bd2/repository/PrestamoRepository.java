@@ -10,4 +10,5 @@ import java.util.List;
 public interface PrestamoRepository extends MongoRepository<Prestamo, String> {
     List<Prestamo> findByUsuarioId(String usuarioId);
     List<Prestamo> findByEstado(String estado);
+    List<Prestamo> findByVideojuegoId(String videojuegoId);
 }

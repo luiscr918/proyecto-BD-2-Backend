@@ -30,7 +30,11 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
-    public List<Usuario> obtenerPorRol(String rolId) {
+    public List<Usuario> obtenerPorRol(Integer rolId) {
         return usuarioRepository.findByRolId(rolId);
+    }
+    /* Nuevo metodo para login*/
+    public Optional<Usuario> login(String correo, String contrasenia) {
+        return usuarioRepository.findByCorreoAndContrasenia(correo, contrasenia);
     }
 }

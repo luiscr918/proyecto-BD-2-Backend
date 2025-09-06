@@ -43,6 +43,10 @@ public class PrestamoController {
             prestamoExistente.setFechaPrestamo(prestamo.getFechaPrestamo());
             prestamoExistente.setFechaDevolucion(prestamo.getFechaDevolucion());
             prestamoExistente.setEstado(prestamo.getEstado());
+            prestamoExistente.setCantidad(prestamo.getCantidad());
+            prestamoExistente.setSubtotal(prestamo.getSubtotal());
+            prestamoExistente.setTotal(prestamo.getTotal());
+            prestamoExistente.setVideojuegoId(prestamo.getVideojuegoId());
             prestamoExistente.setUsuarioId(prestamo.getUsuarioId());
             return prestamoService.guardar(prestamoExistente);
         }
@@ -59,6 +63,11 @@ public class PrestamoController {
     @GetMapping("/usuario/{usuarioId}")
     public List<Prestamo> obtenerPorUsuario(@PathVariable String usuarioId) {
         return prestamoService.obtenerPorUsuario(usuarioId);
+    }
+    // Buscar préstamos por videojuego
+    @GetMapping("/videojuego/{videojuegoId}")
+    public List<Prestamo> obtenerPorVideojuego(@PathVariable String videojuegoId) {
+        return prestamoService.obtenerPorVideojuego(videojuegoId);
     }
 
     // Buscar préstamos por estado

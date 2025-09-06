@@ -28,4 +28,6 @@ public class Videojuego {
     @NotNull(message = "El precio es obligatorio")
     @Min(value = 1, message = "El precio debe ser mayor a 0")
     private Double precio;
+    @NotBlank(message = "La imagen es obligatoria")
+    private String urlImagen;
 }
