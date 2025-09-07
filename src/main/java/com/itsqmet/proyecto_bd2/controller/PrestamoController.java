@@ -1,11 +1,14 @@
 package com.itsqmet.proyecto_bd2.controller;
 
 import com.itsqmet.proyecto_bd2.model.Prestamo;
+import com.itsqmet.proyecto_bd2.repository.PrestamoRepository;
 import com.itsqmet.proyecto_bd2.service.PrestamoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -15,6 +18,8 @@ public class PrestamoController {
 
     @Autowired
     private PrestamoService prestamoService;
+    @Autowired
+    private PrestamoRepository prestamoRepository;
 
     // Leer todos los préstamos
     @GetMapping
@@ -75,4 +80,20 @@ public class PrestamoController {
     public List<Prestamo> obtenerPorEstado(@PathVariable String estado) {
         return prestamoService.obtenerPorEstado(estado);
     }
+    @PatchMapping("/{id}/estado")
+    public ResponseEntity<Prestamo> actualizarEstado(
+            @PathVariable String id,
+            @RequestBody Map<String, String> body) {
+
+        String nuevoEstado = body.get("estado");
+        return prestamoRepository.findById(id)
+                .map(prestamo -> {
+                    prestamo.setEstado(nuevoEstado);
+                    Prestamo actualizado = prestamoRepository.save(prestamo);
+                    return ResponseEntity.ok(actualizado);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+
 }
