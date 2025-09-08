@@ -1,6 +1,6 @@
 package com.itsqmet.proyecto_bd2.controller;
 
-import com.itsqmet.proyecto_bd2.entity.Videojuego;
+import com.itsqmet.proyecto_bd2.model.Videojuego;
 import com.itsqmet.proyecto_bd2.service.VideojuegoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,47 +9,63 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/videojuego")
+@RequestMapping("/videojuegos")
 @CrossOrigin(origins = "http://localhost:5173")
 public class VideojuegoController {
+
     @Autowired
     private VideojuegoService videojuegoService;
-    //leer todos los videojuegos
+
+    // Leer todos los videojuegos
     @GetMapping
     public List<Videojuego> mostrarVideojuegos() {
-        return videojuegoService.allVideojuegos();
+        return videojuegoService.obtenerTodos();
     }
 
-    //guardar nuevo videojuego
+    // Guardar nuevo videojuego
     @PostMapping
     public Videojuego guardarVideojuego(@RequestBody Videojuego videojuego) {
-        return videojuegoService.guardarVideojuego(videojuego);
+        return videojuegoService.guardar(videojuego);
     }
-    //Buscar Videojuego por id
+
+    // Buscar videojuego por ID
     @GetMapping("/{id}")
-    public Optional<Videojuego> buscarVideojuegoId(@PathVariable Long id){
-        return videojuegoService.buscarVideojuegoId(id);
+    public Optional<Videojuego> buscarVideojuegoId(@PathVariable String id) {
+        return videojuegoService.obtenerPorId(id);
     }
-    //actualizar videojuego
+
+    // Actualizar videojuego
     @PutMapping("/{id}")
-    public Videojuego actualizarVideojuego(@PathVariable Long id, @RequestBody Videojuego videojuego) {
-        Optional<Videojuego> videojuegoOptional = videojuegoService.buscarVideojuegoId(id);
+    public Videojuego actualizarVideojuego(@PathVariable String id, @RequestBody Videojuego videojuego) {
+        Optional<Videojuego> videojuegoOptional = videojuegoService.obtenerPorId(id);
         if (videojuegoOptional.isPresent()) {
-            Videojuego VideojuegoExistente = videojuegoOptional.get();
-            VideojuegoExistente.setTitulo(videojuego.getTitulo());
-            VideojuegoExistente.setGenero(videojuego.getGenero());
-            VideojuegoExistente.setStock(videojuego.getStock());
-            VideojuegoExistente.setPlataforma(videojuego.getPlataforma());
-            VideojuegoExistente.setPrecio(videojuego.getPrecio());
-            VideojuegoExistente.setDetallePrestamo(videojuego.getDetallePrestamo());
-            return videojuegoService.guardarVideojuego(VideojuegoExistente);
+            Videojuego existente = videojuegoOptional.get();
+            existente.setTitulo(videojuego.getTitulo());
+            existente.setGenero(videojuego.getGenero());
+            existente.setStock(videojuego.getStock());
+            existente.setPlataforma(videojuego.getPlataforma());
+            existente.setPrecio(videojuego.getPrecio());
+            existente.setUrlImagen(videojuego.getUrlImagen());
+            return videojuegoService.guardar(existente);
         }
         return null;
     }
 
-    //eliminar videojuego
+    // Eliminar videojuego
     @DeleteMapping("/{id}")
-    public void eliminarVideojuego(@PathVariable Long id) {
-        videojuegoService.eliminarVideojuego(id);
+    public void eliminarVideojuego(@PathVariable String id) {
+        videojuegoService.eliminar(id);
+    }
+
+    // Buscar por género
+    @GetMapping("/genero/{genero}")
+    public List<Videojuego> obtenerPorGenero(@PathVariable String genero) {
+        return videojuegoService.obtenerPorGenero(genero);
+    }
+
+    // Buscar por plataforma
+    @GetMapping("/plataforma/{plataforma}")
+    public List<Videojuego> obtenerPorPlataforma(@PathVariable String plataforma) {
+        return videojuegoService.obtenerPorPlataforma(plataforma);
     }
 }

@@ -1,6 +1,6 @@
 package com.itsqmet.proyecto_bd2.service;
 
-import com.itsqmet.proyecto_bd2.entity.Videojuego;
+import com.itsqmet.proyecto_bd2.model.Videojuego;
 import com.itsqmet.proyecto_bd2.repository.VideojuegoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,21 +12,27 @@ import java.util.Optional;
 public class VideojuegoService {
     @Autowired
     private VideojuegoRepository videojuegoRepository;
-    //Lista de videojuegos
-    public List<Videojuego> allVideojuegos(){
+
+    public List<Videojuego> obtenerTodos() {
         return videojuegoRepository.findAll();
     }
 
-    //buscar por id(para actualizar y eliminar)
-    public Optional<Videojuego> buscarVideojuegoId(Long id){
+    public Optional<Videojuego> obtenerPorId(String id) {
         return videojuegoRepository.findById(id);
     }
-    //Guardar videojuego
-    public Videojuego guardarVideojuego(Videojuego videojuego){
+
+    public Videojuego guardar(Videojuego videojuego) {
         return videojuegoRepository.save(videojuego);
     }
-    //Eliminar videojuego
-    public void eliminarVideojuego(Long id){
+
+    public void eliminar(String id) {
         videojuegoRepository.deleteById(id);
+    }
+
+    public List<Videojuego> obtenerPorGenero(String genero) {
+        return videojuegoRepository.findByGenero(genero);
+    }
+    public List<Videojuego> obtenerPorPlataforma(String plataforma) {
+        return videojuegoRepository.findByPlataforma(plataforma);
     }
 }

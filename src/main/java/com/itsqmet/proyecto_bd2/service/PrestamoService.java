@@ -1,6 +1,6 @@
 package com.itsqmet.proyecto_bd2.service;
 
-import com.itsqmet.proyecto_bd2.entity.Prestamo;
+import com.itsqmet.proyecto_bd2.model.Prestamo;
 import com.itsqmet.proyecto_bd2.repository.PrestamoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,21 +12,31 @@ import java.util.Optional;
 public class PrestamoService {
     @Autowired
     private PrestamoRepository prestamoRepository;
-    //Lista de prestamos
-    public List<Prestamo> allPrestamos(){
+
+    public List<Prestamo> obtenerTodos() {
         return prestamoRepository.findAll();
     }
 
-    //buscar por id(para actualizar y eliminar)
-    public Optional<Prestamo> buscarPrestamoId(Long id){
+    public Optional<Prestamo> obtenerPorId(String id) {
         return prestamoRepository.findById(id);
     }
-    //Guardar prestamo
-    public Prestamo guardarPrestamo(Prestamo prestamo){
+
+    public Prestamo guardar(Prestamo prestamo) {
         return prestamoRepository.save(prestamo);
     }
-    //Eliminar prestamo
-    public void eliminarPrestamo(Long id){
+
+    public void eliminar(String id) {
         prestamoRepository.deleteById(id);
+    }
+
+    public List<Prestamo> obtenerPorUsuario(String usuarioId) {
+        return prestamoRepository.findByUsuarioId(usuarioId);
+    }
+    public List<Prestamo> obtenerPorVideojuego(String videojuegoId) {
+        return prestamoRepository.findByVideojuegoId(videojuegoId);
+    }
+
+    public List<Prestamo> obtenerPorEstado(String estado) {
+        return prestamoRepository.findByEstado(estado);
     }
 }
